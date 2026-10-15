@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   RedJr Builders | Ordering &amp; Inventory
+  </title>
+  <link href="styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="login-screen" id="loginScreen">
+   <section class="login-brand">
+    <div class="brand-logo">
+     <span class="logo">
+      RJ
+     </span>
+     <span>
+      RedJr Builders
+      <br/>
+      &amp; Construction Supply
+     </span>
+    </div>
+    <div>
+     <div class="badge b-red" style="background:#ffffff1b;color:#fff">
+      BUSINESS PORTAL
+     </div>
+     <h1>
+      Building better,
+      <br/>
+      one order at a time.
+     </h1>
+     <p>
+      A simpler way to browse construction supplies, manage orders, and keep inventory organized.
+     </p>
+     <div class="login-points">
+      <span>
+       &checkmark; Product catalog
+      </span>
+      <span>
+       &checkmark; Order tracking
+      </span>
+      <span>
+       &checkmark; Stock monitoring
+      </span>
+     </div>
+    </div>
+    <div class="login-footer">
+     RedJr Builders and Construction Supply &middot; Prototype
+    </div>
+   </section>
+   <section class="login-form-wrap">
+    <form class="login-card" id="loginForm">
+     <h2>
+      Welcome back
+     </h2>
+     <p>
+      Sign in to manage your store workspace.
+     </p>
+     <label for="email">
+      Email address
+     </label>
+     <input autocomplete="username" id="email" required="" type="email" value="admin@redjr.test"/>
+     <label for="password">
+      Password
+     </label>
+     <input autocomplete="current-password" id="password" required="" type="password" value="redjr123"/>
+     <div class="field-help">
+      Demo credentials are prefilled for presentation.
+     </div>
+     <button class="primary" type="submit">
+      Sign in to dashboard
+      <span aria-hidden="true">
+       &rarr;
+      </span>
+     </button>
+     <div class="demo-hint">
+      <strong>
+       Demo access
+      </strong>
+      <br/>
+      Email: admin@redjr.test
+      <br/>
+      Password: redjr123
+      <br/>
+      <span class="muted">
+       This is a front-end classroom prototype; it does not authenticate real accounts.
+      </span>
+     </div>
+    </form>
+   </section>
+  </div>
+  <div class="app hidden" id="app">
+   <aside class="sidebar" id="sidebar">
+    <div class="side-brand">
+     <span class="logo">
+      RJ
+     </span>
+     <div>
+      <strong>
+       RedJr Builders
+      </strong>
+      <small>
+       Construction Supply
+      </small>
+     </div>
+    </div>
+    <div class="nav-label">
+     Workspace
+    </div>
+    <nav aria-label="Main navigation" class="nav">
+     <button class="active" data-page="dashboard">
+      <span class="nav-ico">
+       ▦
+      </span>
+      Dashboard
+     </button>
+     <button data-page="products">
+      <span class="nav-ico">
+       ▤
+      </span>
+      Products
+     </button>
+     <button data-page="orders">
+      <span class="nav-ico">
+       ▣
+      </span>
+      Orders
+      <span class="badge b-red hidden" id="navOrderCount">
+      </span>
+     </button>
+     <button data-page="inventory">
+      <span class="nav-ico">
+       ▥
+      </span>
+      Inventory
+     </button>
+     <button data-page="reports">
+      <span class="nav-ico">
+       ▤
+      </span>
+      Reports
+     </button>
+     <button data-page="history">
+      <span class="nav-ico">
+       ◷
+      </span>
+      History
+     </button>
+    </nav>
+    <div class="side-bottom">
+     RedJr Builders &amp; Construction Supply
+     <br/>
+     <br/>
+     Prototype v1.0 &middot; Local demo data
+    </div>
+   </aside>
+   <main class="main">
+    <header class="topbar">
+     <div style="display:flex;align-items:center;gap:12px">
+      <button aria-label="Open navigation" class="secondary mobile-menu" id="mobileMenu">
+       ☰
+      </button>
+      <div>
+       <div class="crumb">
+        RedJr Builders /
+        <span id="crumb">
+         Dashboard
+        </span>
+       </div>
+       <h2 id="topTitle">
+        Dashboard
+       </h2>
+      </div>
+     </div>
+     <div class="top-actions">
+      <span class="date-label" id="todayLabel">
+      </span>
+      <div class="profile-menu">
+       <button aria-label="Open account menu" class="avatar" id="profileButton">
+        RJ
+       </button>
+       <div class="profile-pop hidden" id="profilePop">
+        <button id="profileDetails">
+         Account details
+        </button>
+        <button id="exportData">
+         Export demo data (CSV)
+        </button>
+        <button id="logoutButton">
+         Sign out
+        </button>
+       </div>
+      </div>
+     </div>
+    </header>
+    <div class="content">
+     <section class="page" id="page-dashboard">
+      <div class="page-head">
+       <div>
+        <h1>
+         Good morning, Admin
+        </h1>
+        <p>
+         Here&rsquo;s what&rsquo;s happening with your store today.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="outline" onclick="navigate('reports')">
+         View reports
+        </button>
+        <button class="primary" onclick="navigate('products')">
+         ＋ Create an order
+        </button>
+       </div>
+      </div>
+      <div class="stats" id="dashboardStats">
+      </div>
+      <div class="layout-2">
+       <section class="panel">
+        <div class="panel-head">
+         <div>
+          <h3>
+           Recent orders
+          </h3>
+          <div class="panel-sub">
+           Latest customer transactions
+          </div>
+         </div>
+         <button class="outline small" onclick="navigate('orders')">
+          View all
+         </button>
+        </div>
+        <div class="table-wrap" id="recentOrders">
+        </div>
+       </section>
+       <section class="panel">
+        <div class="panel-head">
+         <div>
+          <h3>
+           Inventory watch
+          </h3>
+          <div class="panel-sub">
+           Items that may need restocking
+          </div>
+         </div>
+         <button class="outline small" onclick="navigate('inventory')">
+          Manage stock
+         </button>
+        </div>
+        <div class="panel-body">
+         <div class="quick-list" id="inventoryWatch">
+         </div>
+        </div>
+       </section>
+      </div>
+      <div class="panel" style="margin-top:18px">
+       <div class="panel-head">
+        <div>
+         <h3>
+          Quick actions
+         </h3>
+         <div class="panel-sub">
+          Jump to a common task
+         </div>
+        </div>
+       </div>
+       <div class="panel-body" style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="outline" onclick="navigate('products')">
+         ▤ Browse products
+        </button>
+        <button class="outline" onclick="openAddProduct()">
+         ＋ Add a product
+        </button>
+        <button class="outline" onclick="navigate('orders')">
+         ▣ Review pending orders
+        </button>
+        <button class="outline" onclick="navigate('history')">
+         ◷ View activity history
+        </button>
+       </div>
+      </div>
+     </section>
+     <section class="page hidden" id="page-products">
+      <div class="page-head">
+       <div>
+        <h1>
+         Product catalog
+        </h1>
+        <p>
+         Browse available supplies and add items to an order.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="outline" onclick="openAddProduct()">
+         ＋ Add product
+        </button>
+       </div>
+      </div>
+      <div class="order-layout">
+       <div>
+        <div class="toolbar">
+         <div class="search">
+          <input aria-label="Search products" id="productSearch" placeholder="Search product or SKU..."/>
+         </div>
+         <select aria-label="Sort products" id="productSort">
+          <option value="name">
+           Sort: Name A&ndash;Z
+          </option>
+          <option value="price-low">
+           Price: Low to high
+          </option>
+          <option value="price-high">
+           Price: High to low
+          </option>
+          <option value="stock">
+           Stock: Lowest first
+          </option>
+         </select>
+        </div>
+        <div class="category-row" id="categoryChips" style="margin-bottom:15px">
+        </div>
+        <div class="product-grid" id="productGrid">
+        </div>
+       </div>
+       <aside class="panel cart-panel">
+        <div class="panel-head">
+         <div>
+          <h3>
+           Current order
+          </h3>
+          <div class="panel-sub">
+           Review items before checkout
+          </div>
+         </div>
+         <span class="badge b-blue" id="cartCount">
+          0 items
+         </span>
+        </div>
+        <div class="panel-body">
+         <div class="form-grid">
+          <div class="full">
+           <label for="customerName">
+            Customer name *
+           </label>
+           <input id="customerName" placeholder="e.g. Juan Dela Cruz"/>
+          </div>
+          <div class="full">
+           <label for="customerContact">
+            Contact number
+           </label>
+           <input id="customerContact" inputmode="tel" placeholder="09XX XXX XXXX"/>
+          </div>
+          <div class="full">
+           <label for="orderType">
+            Fulfillment
+           </label>
+           <select id="orderType">
+            <option value="Pickup">
+             Store pickup
+            </option>
+            <option value="Delivery">
+             Delivery
+            </option>
+           </select>
+          </div>
+          <div class="full hidden" id="addressField">
+           <label for="deliveryAddress">
+            Delivery address *
+           </label>
+           <textarea id="deliveryAddress" placeholder="House no., street, barangay, city" rows="2"></textarea>
+          </div>
+         </div>
+         <div id="cartLines" style="margin-top:12px">
+         </div>
+         <div id="cartSummary">
+         </div>
+         <div class="cart-actions">
+          <button class="primary" id="checkoutBtn">
+           Review and place order
+          </button>
+          <button class="outline" id="clearCartBtn">
+           Clear order
+          </button>
+         </div>
+         <p class="tiny muted">
+          No payment is processed. This prototype simulates an order workflow.
+         </p>
+        </div>
+       </aside>
+      </div>
+     </section>
+     <section class="page hidden" id="page-orders">
+      <div class="page-head">
+       <div>
+        <h1>
+         Orders
+        </h1>
+        <p>
+         Review orders and update their fulfillment status.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="primary" onclick="navigate('products')">
+         ＋ New order
+        </button>
+       </div>
+      </div>
+      <div class="stats" id="orderStats">
+      </div>
+      <div class="panel">
+       <div class="panel-body">
+        <div class="toolbar">
+         <div class="search">
+          <input aria-label="Search orders" id="orderSearch" placeholder="Search order ID or customer..."/>
+         </div>
+         <select id="orderStatusFilter">
+          <option value="All">
+           All statuses
+          </option>
+          <option>
+           Pending
+          </option>
+          <option>
+           Confirmed
+          </option>
+          <option>
+           Ready for pickup
+          </option>
+          <option>
+           Out for delivery
+          </option>
+          <option>
+           Completed
+          </option>
+          <option>
+           Cancelled
+          </option>
+         </select>
+        </div>
+        <div class="table-wrap" id="ordersTable">
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="page hidden" id="page-inventory">
+      <div class="page-head">
+       <div>
+        <h1>
+         Inventory management
+        </h1>
+        <p>
+         Monitor available quantities and update stock levels.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="outline" onclick="exportCSV('inventory')">
+         Export CSV
+        </button>
+        <button class="primary" onclick="openAddProduct()">
+         ＋ Add product
+        </button>
+       </div>
+      </div>
+      <div class="stats" id="inventoryStats">
+      </div>
+      <div class="panel">
+       <div class="panel-body">
+        <div class="toolbar">
+         <div class="search">
+          <input aria-label="Search inventory" id="inventorySearch" placeholder="Search item or SKU..."/>
+         </div>
+         <select id="stockFilter">
+          <option value="All">
+           All stock levels
+          </option>
+          <option value="Low Stock">
+           Low stock
+          </option>
+          <option value="Out of Stock">
+           Out of stock
+          </option>
+          <option value="In Stock">
+           In stock
+          </option>
+         </select>
+        </div>
+        <div class="table-wrap" id="inventoryTable">
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="page hidden" id="page-reports">
+      <div class="page-head">
+       <div>
+        <h1>
+         Reports &amp; insights
+        </h1>
+        <p>
+         A simple overview of sales activity and product performance.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="outline" onclick="window.print()">
+         Print report
+        </button>
+        <button class="primary" onclick="exportCSV('orders')">
+         Export orders CSV
+        </button>
+       </div>
+      </div>
+      <div class="stats" id="reportStats">
+      </div>
+      <div class="layout-2">
+       <section class="panel">
+        <div class="panel-head">
+         <div>
+          <h3>
+           Sales by order status
+          </h3>
+          <div class="panel-sub">
+           Order count by current status
+          </div>
+         </div>
+        </div>
+        <div class="panel-body" id="statusBars">
+        </div>
+       </section>
+       <section class="panel">
+        <div class="panel-head">
+         <div>
+          <h3>
+           Top products
+          </h3>
+          <div class="panel-sub">
+           Based on quantities in completed and active orders
+          </div>
+         </div>
+        </div>
+        <div class="panel-body" id="topProducts">
+        </div>
+       </section>
+      </div>
+      <div class="notice" style="margin-top:18px">
+       Report values are calculated from the sample data and any orders created during this browser session. This prototype is not connected to a live business database.
+      </div>
+     </section>
+     <section class="page hidden" id="page-history">
+      <div class="page-head">
+       <div>
+        <h1>
+         Activity history
+        </h1>
+        <p>
+         Keep track of actions taken in this prototype.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="outline" onclick="exportCSV('history')">
+         Export history CSV
+        </button>
+       </div>
+      </div>
+      <div class="panel">
+       <div class="panel-body">
+        <div class="toolbar">
+         <div class="search">
+          <input aria-label="Search activity history" id="historySearch" placeholder="Search activity..."/>
+         </div>
+         <button class="outline" onclick="clearHistory()">
+          Clear history
+         </button>
+        </div>
+        <div class="table-wrap" id="historyTable">
+        </div>
+       </div>
+      </div>
+     </section>
+     <div class="footer-note">
+      RedJr Builders and Construction Supply &middot; ITEC 80 High-Fidelity Interactive Prototype &middot; Demo only
+     </div>
+    </div>
+   </main>
+  </div>
+  <div id="modalRoot">
+  </div>
+  <div aria-live="polite" class="toast-region" id="toastRegion">
+  </div>
+  <script src="script.js">
+  </script>
+ </body>
+</html>
